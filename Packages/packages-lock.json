@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.srejonkhan.firebase-rest-client": {
+      "version": "https://github.com/SrejonKhan/FirebaseRestClient.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c8599391c11226369de16e80227a7c12fc4560c7"
+    },
     "com.unity.2d.animation": {
       "version": "3.2.3",
       "depth": 0,

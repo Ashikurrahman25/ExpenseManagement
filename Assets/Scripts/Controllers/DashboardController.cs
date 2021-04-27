@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FirebaseRestClient;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,9 +32,26 @@ public class DashboardController : MonoBehaviour
     public Dropdown monthlyDrop;
     public Dropdown weeklyDrop;
 
-   
 
 
-    
-   
+    private FirebaseUser user;
+
+    public void FetchData()
+    {
+        user = new FirebaseAuthentication().CurrentUser;
+
+        welcomeText.text = $"Hi, {user.DisplayName}";
+        emailText.text = user.Email;
+
+    }
+}
+
+public class Transaction
+{
+    public int type;
+    public string subType;
+    public string title;
+    public float amount;
+    public string trxId;
+    public string dateTime;
 }

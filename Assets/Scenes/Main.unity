@@ -3607,7 +3607,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 297175071}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 643855162}
+        m_MethodName: OnRegistration
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &297175070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5850,6 +5861,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62496c550dea47d4cb9aff16357fcd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashboardController: {fileID: 1843535584}
+  panelController: {fileID: 643855162}
+  transactionController: {fileID: 840788208}
+  buttonBehaviourController: {fileID: 57611641}
 --- !u!4 &557074761
 Transform:
   m_ObjectHideFlags: 0
@@ -6394,6 +6409,11 @@ MonoBehaviour:
   dashboardPanel: {fileID: 2142004720}
   transactionPanel: {fileID: 1943956310}
   addTransactionPanel: {fileID: 549119614}
+  emailInput: {fileID: 774377675}
+  passwordInput: {fileID: 936498502}
+  displayNameInput: {fileID: 371457747}
+  regEmailInput: {fileID: 1217637087}
+  regPassInput: {fileID: 1409861651}
 --- !u!1 &650888827
 GameObject:
   m_ObjectHideFlags: 0
@@ -19838,7 +19858,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 643855162}
-        m_MethodName: GoToDashboard
+        m_MethodName: OnLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

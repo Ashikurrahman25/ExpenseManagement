@@ -1,0 +1,9 @@
+{
+    "endpoint": "https://expansemanagement-fe870-default-rtdb.firebaseio.com/",
+    "webApi": "AIzaSyASAEqEUrZybhAQN9wx4pvxkobUDE48TDE ",
+    "storageEndpoint": "",
+    "googleClientId": "",
+    "googleClientSecret": "",
+    "facebookClientId": "",
+    "facebookClientSecret": ""
+}

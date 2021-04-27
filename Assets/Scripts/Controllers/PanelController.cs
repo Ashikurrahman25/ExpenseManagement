@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using FirebaseRestClient;
+using System.Linq;
+using System;
 
 public class PanelController : MonoBehaviour
 {
@@ -19,9 +23,27 @@ public class PanelController : MonoBehaviour
     public GameObject transactionPanel;
     public GameObject addTransactionPanel;
 
+    [Space(10)]
+    [Header("UI")]
+    [Space(10)]
+
+    [Header("Login")]
+    public InputField emailInput;
+    public InputField passwordInput;
+
+    [Header("Registration")]
+    public InputField displayNameInput;
+    public InputField regEmailInput;
+    public InputField regPassInput;
+
+
+
+    private Controller controller;
+
     private void Start()
     {
         onLogin = true;
+        controller = Controller.self;
     }
 
     public void Update()
@@ -41,14 +63,41 @@ public class PanelController : MonoBehaviour
 
     public void GoToLogin()
     {
-        GoToPanel(loginPanel,registrationPanel, 0,840f);
+        GoToPanel(loginPanel, registrationPanel, 0, 840f);
         onLogin = true;
+    }
+
+    public void OnLogin()
+    {
+        new FirebaseAuthentication().SignInWithEmailAndPassword(emailInput.text, passwordInput.text).OnSuccess(user =>
+        {
+            //GoToPanel(loginPanel, registrationPanel, 0, 840f);
+            onLogin = true;
+            GoToDashboard();
+            controller.dashboardController.FetchData(); //Fetch data
+        }).
+        OnError(err => ErrorHandling(err));
     }
 
     public void GoToRegistration()
     {
         GoToPanel(registrationPanel, loginPanel, 0, -840f);
         onRegistration = true;
+    }
+
+    public void OnRegistration()
+    {
+        new FirebaseAuthentication().CreateUserWithEmailAndPassword(regEmailInput.text, regPassInput.text).OnSuccess(user =>
+        {
+            user.UpdateProfile(displayNameInput.text, "null").OnSuccess(updatedUser =>
+            {
+                GoToPanel(dashboardPanel, registrationPanel, 0, -840f);
+                controller.dashboardController.FetchData(); //Fetch data
+
+            })
+            .OnError(err => ErrorHandling(err));
+        }).
+        OnError(err => ErrorHandling(err));
     }
 
     public void GoToDashboard()
@@ -64,6 +113,8 @@ public class PanelController : MonoBehaviour
             GoToPanel(dashboardPanel, addTransactionPanel, 0, -840f);
 
         onDashBoard = true;
+
+        
     }
 
     public void GoToTransactions()
@@ -103,6 +154,13 @@ public class PanelController : MonoBehaviour
         onDashBoard = false;
         onTransactions = false;
         onAddTransaction = false;
+    }
+
+    void ErrorHandling(Exception err)
+    {
+        string errorText = "";
+        RequestErrorHelper.ToDictionary(err).ToList().ForEach(x => errorText += x.Key + " - " + x.Value + "\n");
+        Debug.LogError(errorText);
     }
 
 
